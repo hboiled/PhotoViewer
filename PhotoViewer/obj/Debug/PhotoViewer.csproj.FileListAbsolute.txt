@@ -7,16 +7,10 @@ C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\Pho
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.exe
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.pdb
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.abstractions.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.runner.visualstudio.testadapter.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.runner.reporters.net452.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.runner.utility.net452.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.assert.dll
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.core.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.execution.desktop.dll
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.assert.xml
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.core.xml
-C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.execution.desktop.xml
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.csproj.CopyComplete
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.SignIn.resources
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.Main.resources
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.csprojAssemblyReference.cache
+C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.abstractions.xml

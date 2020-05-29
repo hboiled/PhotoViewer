@@ -16,10 +16,11 @@ namespace PhotoViewer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // testing main form
-            //
-            Main main = new Main();
-            main.Show();
+            // testing main form            
+            //Main main = new Main();
+            //main.Show();
+            SignIn signIn = new SignIn();
+            signIn.Show();
             Application.Run();
             
 
