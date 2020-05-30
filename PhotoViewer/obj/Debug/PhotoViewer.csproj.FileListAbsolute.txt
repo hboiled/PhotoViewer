@@ -14,3 +14,6 @@ C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\Pho
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.Main.resources
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\obj\Debug\PhotoViewer.csprojAssemblyReference.cache
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\xunit.abstractions.xml
+C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\LumenWorks.Framework.IO.dll
+C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\LumenWorks.Framework.IO.pdb
+C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewerApp\PhotoViewer\bin\Debug\LumenWorks.Framework.IO.xml

@@ -35,7 +35,7 @@
             this.Password = new System.Windows.Forms.Label();
             this.SignInBtn = new System.Windows.Forms.Button();
             this.RegisterBtn = new System.Windows.Forms.Button();
-            this.ErrorMsg = new System.Windows.Forms.Label();
+            this.OutcomeMsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UsernameTB
@@ -101,21 +101,21 @@
             this.RegisterBtn.UseVisualStyleBackColor = true;
             this.RegisterBtn.Click += new System.EventHandler(this.RegisterBtn_Click);
             // 
-            // ErrorMsg
+            // OutcomeMsg
             // 
-            this.ErrorMsg.AutoSize = true;
-            this.ErrorMsg.ForeColor = System.Drawing.Color.DarkRed;
-            this.ErrorMsg.Location = new System.Drawing.Point(142, 249);
-            this.ErrorMsg.Name = "ErrorMsg";
-            this.ErrorMsg.Size = new System.Drawing.Size(0, 20);
-            this.ErrorMsg.TabIndex = 8;
+            this.OutcomeMsg.AutoSize = true;
+            this.OutcomeMsg.ForeColor = System.Drawing.Color.DarkRed;
+            this.OutcomeMsg.Location = new System.Drawing.Point(142, 249);
+            this.OutcomeMsg.Name = "OutcomeMsg";
+            this.OutcomeMsg.Size = new System.Drawing.Size(0, 20);
+            this.OutcomeMsg.TabIndex = 8;
             // 
             // SignIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 294);
-            this.Controls.Add(this.ErrorMsg);
+            this.Controls.Add(this.OutcomeMsg);
             this.Controls.Add(this.RegisterBtn);
             this.Controls.Add(this.SignInBtn);
             this.Controls.Add(this.Password);
@@ -143,6 +143,6 @@
         private System.Windows.Forms.Label Password;
         private System.Windows.Forms.Button SignInBtn;
         private System.Windows.Forms.Button RegisterBtn;
-        private System.Windows.Forms.Label ErrorMsg;
+        private System.Windows.Forms.Label OutcomeMsg;
     }
 }

@@ -33,7 +33,7 @@ namespace PhotoViewer.Security
         public bool IsPasswordMatch(string password, string salt, string hash)
         {
             string finalString = password + salt;
-            return hash == hashGen.HashSaltPassword(finalString);
+            return hash.Equals(hashGen.HashSaltPassword(finalString));
         }
     }
 }
