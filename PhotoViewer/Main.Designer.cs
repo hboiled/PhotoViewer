@@ -37,7 +37,7 @@
             this.SongBtn = new System.Windows.Forms.Button();
             this.AddBtn = new System.Windows.Forms.Button();
             this.NextBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PictureBox = new System.Windows.Forms.PictureBox();
             this.ImageGallery = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,8 +51,13 @@
             this.Title = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SearchGroup = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.GalleryNameTB = new System.Windows.Forms.TextBox();
+            this.DeleteGalleryBtn = new System.Windows.Forms.Button();
+            this.CreateGalleryBtn = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
             this.GalleryBtnGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SearchGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,11 +75,11 @@
             // 
             this.DisplayName.AutoSize = true;
             this.DisplayName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DisplayName.Location = new System.Drawing.Point(1613, 31);
+            this.DisplayName.Location = new System.Drawing.Point(1628, 31);
             this.DisplayName.Name = "DisplayName";
-            this.DisplayName.Size = new System.Drawing.Size(127, 22);
+            this.DisplayName.Size = new System.Drawing.Size(133, 22);
             this.DisplayName.TabIndex = 2;
-            this.DisplayName.Text = "Signed in as:";
+            this.DisplayName.Text = "Signed in as: ";
             // 
             // GalleryList
             // 
@@ -84,6 +89,7 @@
             this.GalleryList.Name = "GalleryList";
             this.GalleryList.Size = new System.Drawing.Size(255, 604);
             this.GalleryList.TabIndex = 3;
+            this.GalleryList.SelectedIndexChanged += new System.EventHandler(this.GalleryList_SelectedIndexChanged);
             // 
             // PrevBtn
             // 
@@ -100,7 +106,7 @@
             this.GalleryBtnGroup.Controls.Add(this.AddBtn);
             this.GalleryBtnGroup.Controls.Add(this.NextBtn);
             this.GalleryBtnGroup.Controls.Add(this.PrevBtn);
-            this.GalleryBtnGroup.Location = new System.Drawing.Point(790, 152);
+            this.GalleryBtnGroup.Location = new System.Drawing.Point(1130, 152);
             this.GalleryBtnGroup.Name = "GalleryBtnGroup";
             this.GalleryBtnGroup.Size = new System.Drawing.Size(320, 166);
             this.GalleryBtnGroup.TabIndex = 5;
@@ -124,6 +130,7 @@
             this.AddBtn.TabIndex = 6;
             this.AddBtn.Text = "Add";
             this.AddBtn.UseVisualStyleBackColor = true;
+            this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // NextBtn
             // 
@@ -134,15 +141,15 @@
             this.NextBtn.Text = "Next";
             this.NextBtn.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // PictureBox
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(450, 368);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1000, 600);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.PictureBox.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox.Image")));
+            this.PictureBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("PictureBox.InitialImage")));
+            this.PictureBox.Location = new System.Drawing.Point(450, 368);
+            this.PictureBox.Name = "PictureBox";
+            this.PictureBox.Size = new System.Drawing.Size(1000, 600);
+            this.PictureBox.TabIndex = 6;
+            this.PictureBox.TabStop = false;
             // 
             // ImageGallery
             // 
@@ -257,6 +264,10 @@
             // 
             // SearchGroup
             // 
+            this.SearchGroup.Controls.Add(this.label5);
+            this.SearchGroup.Controls.Add(this.GalleryNameTB);
+            this.SearchGroup.Controls.Add(this.DeleteGalleryBtn);
+            this.SearchGroup.Controls.Add(this.CreateGalleryBtn);
             this.SearchGroup.Controls.Add(this.button1);
             this.SearchGroup.Controls.Add(this.textBox1);
             this.SearchGroup.Controls.Add(this.button2);
@@ -266,10 +277,55 @@
             this.SearchGroup.Controls.Add(this.button5);
             this.SearchGroup.Location = new System.Drawing.Point(60, 100);
             this.SearchGroup.Name = "SearchGroup";
-            this.SearchGroup.Size = new System.Drawing.Size(524, 218);
+            this.SearchGroup.Size = new System.Drawing.Size(854, 218);
             this.SearchGroup.TabIndex = 14;
             this.SearchGroup.TabStop = false;
             this.SearchGroup.Text = "Search and Sort";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(661, 29);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(80, 25);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Gallery";
+            // 
+            // GalleryNameTB
+            // 
+            this.GalleryNameTB.Location = new System.Drawing.Point(580, 69);
+            this.GalleryNameTB.Name = "GalleryNameTB";
+            this.GalleryNameTB.Size = new System.Drawing.Size(239, 26);
+            this.GalleryNameTB.TabIndex = 16;
+            // 
+            // DeleteGalleryBtn
+            // 
+            this.DeleteGalleryBtn.Location = new System.Drawing.Point(580, 161);
+            this.DeleteGalleryBtn.Name = "DeleteGalleryBtn";
+            this.DeleteGalleryBtn.Size = new System.Drawing.Size(239, 36);
+            this.DeleteGalleryBtn.TabIndex = 15;
+            this.DeleteGalleryBtn.Text = "Delete Selected Gallery";
+            this.DeleteGalleryBtn.UseVisualStyleBackColor = true;
+            // 
+            // CreateGalleryBtn
+            // 
+            this.CreateGalleryBtn.Location = new System.Drawing.Point(580, 110);
+            this.CreateGalleryBtn.Name = "CreateGalleryBtn";
+            this.CreateGalleryBtn.Size = new System.Drawing.Size(239, 36);
+            this.CreateGalleryBtn.TabIndex = 14;
+            this.CreateGalleryBtn.Text = "Create New Gallery";
+            this.CreateGalleryBtn.UseVisualStyleBackColor = true;
+            this.CreateGalleryBtn.Click += new System.EventHandler(this.CreateGalleryBtn_Click);
+            // 
+            // SaveBtn
+            // 
+            this.SaveBtn.Location = new System.Drawing.Point(1760, 193);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(110, 102);
+            this.SaveBtn.TabIndex = 8;
+            this.SaveBtn.Text = "Save Changes";
+            this.SaveBtn.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -277,13 +333,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
+            this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.SearchGroup);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ImageGallery);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.GalleryBtnGroup);
             this.Controls.Add(this.GalleryList);
             this.Controls.Add(this.DisplayName);
@@ -293,7 +350,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
             this.GalleryBtnGroup.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.SearchGroup.ResumeLayout(false);
             this.SearchGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -311,7 +368,7 @@
         private System.Windows.Forms.Button SongBtn;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button NextBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.ListBox ImageGallery;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -325,5 +382,10 @@
         private System.Windows.Forms.Label Title;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox SearchGroup;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox GalleryNameTB;
+        private System.Windows.Forms.Button DeleteGalleryBtn;
+        private System.Windows.Forms.Button CreateGalleryBtn;
+        private System.Windows.Forms.Button SaveBtn;
     }
 }

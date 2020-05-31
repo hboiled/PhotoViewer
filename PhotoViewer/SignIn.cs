@@ -73,7 +73,7 @@ namespace PhotoViewer
                 {
                     // sign in                
                     // OutcomeMsg.Text = "    " + username+ " has logged in successfully";
-                    Main main = new Main();
+                    Main main = new Main(username);
                     main.Show();
                     this.Dispose();
                 }

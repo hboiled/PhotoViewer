@@ -9,11 +9,20 @@ namespace PhotoViewer
 {
     public class Gallery
     {
-        LinkedList<Image> images;
+        private readonly LinkedList<Image> images;
+        private readonly string name;
+
+        public LinkedList<Image> Images => images;
+
+        public Gallery(string name)
+        {
+            this.name = name;
+            images = new LinkedList<Image>();
+        }
 
         public void Next()
         {
-
+            
         }
 
         public void Previous()
@@ -23,7 +32,7 @@ namespace PhotoViewer
 
         public void Add(Image image)
         {
-
+            images.AddLast(image);
         }
 
         public void Remove(Image image)
@@ -34,6 +43,11 @@ namespace PhotoViewer
         public void MergeSort()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
     }
 }
