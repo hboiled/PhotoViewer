@@ -34,11 +34,10 @@
             this.GalleryList = new System.Windows.Forms.ListBox();
             this.PrevBtn = new System.Windows.Forms.Button();
             this.GalleryBtnGroup = new System.Windows.Forms.GroupBox();
-            this.SongBtn = new System.Windows.Forms.Button();
+            this.RemoveBtn = new System.Windows.Forms.Button();
             this.AddBtn = new System.Windows.Forms.Button();
             this.NextBtn = new System.Windows.Forms.Button();
             this.PictureBox = new System.Windows.Forms.PictureBox();
-            this.ImageGallery = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -49,16 +48,19 @@
             this.button5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.ViewLbl = new System.Windows.Forms.Label();
             this.SearchGroup = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.GalleryNameTB = new System.Windows.Forms.TextBox();
             this.DeleteGalleryBtn = new System.Windows.Forms.Button();
             this.CreateGalleryBtn = new System.Windows.Forms.Button();
             this.SaveBtn = new System.Windows.Forms.Button();
+            this.ImageGallery = new System.Windows.Forms.DataGridView();
+            this.ImageCol = new System.Windows.Forms.DataGridViewImageColumn();
             this.GalleryBtnGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SearchGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageGallery)).BeginInit();
             this.SuspendLayout();
             // 
             // SignOutBtn
@@ -99,10 +101,11 @@
             this.PrevBtn.TabIndex = 4;
             this.PrevBtn.Text = "Previous";
             this.PrevBtn.UseVisualStyleBackColor = true;
+            this.PrevBtn.Click += new System.EventHandler(this.PrevBtn_Click);
             // 
             // GalleryBtnGroup
             // 
-            this.GalleryBtnGroup.Controls.Add(this.SongBtn);
+            this.GalleryBtnGroup.Controls.Add(this.RemoveBtn);
             this.GalleryBtnGroup.Controls.Add(this.AddBtn);
             this.GalleryBtnGroup.Controls.Add(this.NextBtn);
             this.GalleryBtnGroup.Controls.Add(this.PrevBtn);
@@ -113,14 +116,15 @@
             this.GalleryBtnGroup.TabStop = false;
             this.GalleryBtnGroup.Text = "Gallery Controls";
             // 
-            // SongBtn
+            // RemoveBtn
             // 
-            this.SongBtn.Location = new System.Drawing.Point(163, 96);
-            this.SongBtn.Name = "SongBtn";
-            this.SongBtn.Size = new System.Drawing.Size(110, 49);
-            this.SongBtn.TabIndex = 7;
-            this.SongBtn.Text = "Remove";
-            this.SongBtn.UseVisualStyleBackColor = true;
+            this.RemoveBtn.Location = new System.Drawing.Point(163, 96);
+            this.RemoveBtn.Name = "RemoveBtn";
+            this.RemoveBtn.Size = new System.Drawing.Size(110, 49);
+            this.RemoveBtn.TabIndex = 7;
+            this.RemoveBtn.Text = "Remove";
+            this.RemoveBtn.UseVisualStyleBackColor = true;
+            this.RemoveBtn.Click += new System.EventHandler(this.RemoveBtn_Click);
             // 
             // AddBtn
             // 
@@ -140,6 +144,7 @@
             this.NextBtn.TabIndex = 5;
             this.NextBtn.Text = "Next";
             this.NextBtn.UseVisualStyleBackColor = true;
+            this.NextBtn.Click += new System.EventHandler(this.NextBtn_Click);
             // 
             // PictureBox
             // 
@@ -150,15 +155,6 @@
             this.PictureBox.Size = new System.Drawing.Size(1000, 600);
             this.PictureBox.TabIndex = 6;
             this.PictureBox.TabStop = false;
-            // 
-            // ImageGallery
-            // 
-            this.ImageGallery.FormattingEnabled = true;
-            this.ImageGallery.ItemHeight = 20;
-            this.ImageGallery.Location = new System.Drawing.Point(1617, 368);
-            this.ImageGallery.Name = "ImageGallery";
-            this.ImageGallery.Size = new System.Drawing.Size(255, 604);
-            this.ImageGallery.TabIndex = 7;
             // 
             // label1
             // 
@@ -252,15 +248,15 @@
             this.Title.TabIndex = 10;
             this.Title.Text = "Photo Viewer";
             // 
-            // label4
+            // ViewLbl
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(440, 332);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(195, 25);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Currently Viewing: ";
+            this.ViewLbl.AutoSize = true;
+            this.ViewLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ViewLbl.Location = new System.Drawing.Point(440, 332);
+            this.ViewLbl.Name = "ViewLbl";
+            this.ViewLbl.Size = new System.Drawing.Size(195, 25);
+            this.ViewLbl.TabIndex = 11;
+            this.ViewLbl.Text = "Currently Viewing: ";
             // 
             // SearchGroup
             // 
@@ -326,6 +322,30 @@
             this.SaveBtn.TabIndex = 8;
             this.SaveBtn.Text = "Save Changes";
             this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            // 
+            // ImageGallery
+            // 
+            this.ImageGallery.AllowUserToAddRows = false;
+            this.ImageGallery.AllowUserToDeleteRows = false;
+            this.ImageGallery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ImageGallery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ImageCol});
+            this.ImageGallery.Location = new System.Drawing.Point(1620, 368);
+            this.ImageGallery.Name = "ImageGallery";
+            this.ImageGallery.ReadOnly = true;
+            this.ImageGallery.RowHeadersWidth = 62;
+            this.ImageGallery.RowTemplate.Height = 28;
+            this.ImageGallery.Size = new System.Drawing.Size(240, 600);
+            this.ImageGallery.TabIndex = 15;
+            // 
+            // ImageCol
+            // 
+            this.ImageCol.HeaderText = "Image";
+            this.ImageCol.MinimumWidth = 100;
+            this.ImageCol.Name = "ImageCol";
+            this.ImageCol.ReadOnly = true;
+            this.ImageCol.Width = 150;
             // 
             // Main
             // 
@@ -333,13 +353,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1898, 1024);
+            this.Controls.Add(this.ImageGallery);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.SearchGroup);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.ViewLbl);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ImageGallery);
             this.Controls.Add(this.PictureBox);
             this.Controls.Add(this.GalleryBtnGroup);
             this.Controls.Add(this.GalleryList);
@@ -353,6 +373,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.SearchGroup.ResumeLayout(false);
             this.SearchGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ImageGallery)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,11 +386,10 @@
         private System.Windows.Forms.ListBox GalleryList;
         private System.Windows.Forms.Button PrevBtn;
         private System.Windows.Forms.GroupBox GalleryBtnGroup;
-        private System.Windows.Forms.Button SongBtn;
+        private System.Windows.Forms.Button RemoveBtn;
         private System.Windows.Forms.Button AddBtn;
         private System.Windows.Forms.Button NextBtn;
         private System.Windows.Forms.PictureBox PictureBox;
-        private System.Windows.Forms.ListBox ImageGallery;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
@@ -380,12 +400,14 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Title;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label ViewLbl;
         private System.Windows.Forms.GroupBox SearchGroup;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox GalleryNameTB;
         private System.Windows.Forms.Button DeleteGalleryBtn;
         private System.Windows.Forms.Button CreateGalleryBtn;
         private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.DataGridView ImageGallery;
+        private System.Windows.Forms.DataGridViewImageColumn ImageCol;
     }
 }

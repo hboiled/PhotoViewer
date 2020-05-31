@@ -9,35 +9,55 @@ namespace PhotoViewer
 {
     public class Gallery
     {
-        private readonly LinkedList<Image> images;
+        private LinkedList<string> images;
+        private LinkedListNode<string> current;
         private readonly string name;
 
-        public LinkedList<Image> Images => images;
+        public LinkedList<string> Images => images;
+
+        public LinkedListNode<string> Current { get => current; set => current = value; }
 
         public Gallery(string name)
         {
             this.name = name;
-            images = new LinkedList<Image>();
+            images = new LinkedList<string>();
+            Current = null;
         }
 
         public void Next()
         {
-            
+            if (Current != null && Current.Next != null)
+            {
+                Current = Current.Next;
+            }
         }
 
         public void Previous()
         {
-
+            if (Current != null && Current.Previous != null)
+            {
+                Current = Current.Previous;
+            }                        
         }
 
-        public void Add(Image image)
+        public void Add(string image)
         {
-            images.AddLast(image);
+            Current = Images.First;
+            images.AddLast(image);            
         }
 
-        public void Remove(Image image)
+        public void Remove(string image)
         {
+            if (!IsEmpty())
+            {
+                images.Remove(image);
+            }
+            
+        }
 
+        public Boolean IsEmpty()
+        {
+            return images.Count == 0;
         }
 
         public void MergeSort()
