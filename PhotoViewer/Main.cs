@@ -48,31 +48,8 @@ namespace PhotoViewer
 
         private void LoadGalleries()
         {            
-            string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);
-            Directory.CreateDirectory(userPath);
-
-            DirectoryInfo userInfo = new DirectoryInfo(userPath);
-            FileInfo[] galleryFiles = userInfo.GetFiles("*.csv");
-
-            if (galleryFiles.Length > 0)
-            {
-                foreach (FileInfo file in galleryFiles)
-                {
-                    Gallery gallery = new Gallery(Path.GetFileNameWithoutExtension(file.FullName));
-                    using (CsvReader csv = new CsvReader(
-                                    new StreamReader(file.FullName), false))
-                    {
-                        while (csv.ReadNextRecord())
-                        {
-                            string location = csv[0];
-
-                            gallery.Add(location);
-                        }
-
-                    }
-                    galleries.Add(gallery);
-                }
-            }
+            //string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);
+            galleries = GalleryFetcher.FindGalleries(userSignedIn);
         }
 
         private void SignOutBtn_Click(object sender, EventArgs e)
@@ -199,9 +176,6 @@ namespace PhotoViewer
 
         private void DisplayGalleryImages()
         {
-            //Gallery selectedGallery = galleries.ElementAt(index).Images;
-            
-            // Required to generate failed to load display
             Image.GetThumbnailImageAbort Abort = new Image.GetThumbnailImageAbort(ThumbnailCallback);
 
             ImageGallery.Rows.Clear();
@@ -223,22 +197,9 @@ namespace PhotoViewer
             return false;
         }
 
-        //private Gallery GetSelectedGallery()
-        //{
-        //    Gallery targetGallery = null;
-
-        //    if (GalleryList.SelectedIndex >= 0)
-        //    {
-        //        targetGallery = galleries.ElementAt(GalleryList.SelectedIndex);
-        //    }
-
-        //    return targetGallery;
-        //}
 
         private void NextBtn_Click(object sender, EventArgs e)
-        {
-            //Gallery gallery = GetSelectedGallery();
-            
+        {           
             if (selectedGallery != null && selectedGallery.Current != null)
             {
                 selectedGallery.Next();
