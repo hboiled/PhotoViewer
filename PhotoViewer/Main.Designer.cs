@@ -303,6 +303,7 @@
             this.DeleteGalleryBtn.TabIndex = 15;
             this.DeleteGalleryBtn.Text = "Delete Selected Gallery";
             this.DeleteGalleryBtn.UseVisualStyleBackColor = true;
+            this.DeleteGalleryBtn.Click += new System.EventHandler(this.DeleteGalleryBtn_Click);
             // 
             // CreateGalleryBtn
             // 

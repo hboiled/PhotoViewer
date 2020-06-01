@@ -33,35 +33,29 @@ namespace PhotoViewer
             InitializeComponent();
             userSignedIn = username;
             DisplayName.Text += username;
-            galleries = new List<Gallery>();
+            
             LoadGalleries();
 
             // Only create a default gallery for users with no galleries
+            CreateDefaultGallery();
+
+            RefreshGalleryList();
+        }
+
+        private void CreateDefaultGallery()
+        {
             if (galleries.Count == 0)
             {
+                galleries = new List<Gallery>();
                 defaultGallery = new Gallery("default");
                 galleries.Add(defaultGallery);
             }
-
-            RefreshGalleryList();
         }
 
         private void LoadGalleries()
         {            
             //string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);
             galleries = GalleryFetcher.FindGalleries(userSignedIn);
-        }
-
-        private void SignOutBtn_Click(object sender, EventArgs e)
-        {
-            SignIn signIn = new SignIn();
-            signIn.Show();
-            this.Dispose();
-        }
-
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void CreateGalleryBtn_Click(object sender, EventArgs e)
@@ -82,17 +76,44 @@ namespace PhotoViewer
             }            
         }
 
-        private Boolean GalleryNameExists(string name)
+        private void DeleteGalleryBtn_Click(object sender, EventArgs e)
+        {            
+            DeleteLocalFile();
+            RemoveFromList();
+            CleanUpDeletion();
+        }
+
+        private void DeleteLocalFile()
         {
-            foreach (Gallery gallery in galleries)
+            string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);            
+            string selectedGalleryFile = Path.Combine(userPath, selectedGallery.ToString() + ".csv");
+
+            if (File.Exists(selectedGalleryFile))
             {
-                if (gallery.ToString().Equals(name))
+                string[] fileArray = Directory.GetFiles(userPath, "*.csv");
+
+                foreach (string file in fileArray)
                 {
-                    return true;
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+
+                    if (fileName.Equals(selectedGallery.ToString()))
+                    {
+                        File.Delete(file);
+                        return;
+                    }
                 }
             }
+            
+        }
 
-            return false;
+        private void RemoveFromList()
+        {
+            if (selectedGallery != null)
+            {
+                galleries.Remove(selectedGallery);
+                selectedGallery = null;
+                RefreshGalleryList();
+            }
         }
 
         private void SaveBtn_Click(object sender, EventArgs e)
@@ -117,11 +138,6 @@ namespace PhotoViewer
             }
         }
 
-        private void RefreshGalleryList()
-        {
-            GalleryList.DataSource = null;
-            GalleryList.DataSource = galleries;
-        }
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
@@ -141,65 +157,13 @@ namespace PhotoViewer
                     // get file path for other operations
                     // get selected gallery
                     filePath = openFileDialog.FileName;
-                    processImage(filePath);
+                    processImage(filePath);                    
+                    DisplayGalleryImages();
                 }
             }
         }
-
-        private void processImage(string filePath)
-        {
-            if (GalleryList.SelectedIndex >= 0)
-            {
-                int index = GalleryList.SelectedIndex;
-                Gallery selectedGallery = galleries.ElementAt(index);
-                selectedGallery.Add(filePath);
-
-                loadImage(filePath);
-            }            
-        }
-
-        private void loadImage(string filePath)
-        {
-            Image newImage = Image.FromFile(filePath);
-            PictureBox.Image = newImage;
-        }
-
-        private void GalleryList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (GalleryList.SelectedIndex >= 0)
-            {
-                int targetGallery = GalleryList.SelectedIndex;
-                selectedGallery = galleries.ElementAt(targetGallery);
-                DisplayGalleryImages();
-            }            
-        }
-
-        private void DisplayGalleryImages()
-        {
-            Image.GetThumbnailImageAbort Abort = new Image.GetThumbnailImageAbort(ThumbnailCallback);
-
-            ImageGallery.Rows.Clear();
-
-            foreach (string image in selectedGallery.Images)
-            {
-                Image concreteImage = Image.FromFile(image);
-
-                ImageGallery.Rows.Add(concreteImage.GetThumbnailImage(50, 50,
-                    new Image.GetThumbnailImageAbort(Abort), IntPtr.Zero));
-                
-
-            }
-        }
-        
-        // Works in conjunction with the thumbnail generator
-        public bool ThumbnailCallback()
-        {
-            return false;
-        }
-
-
         private void NextBtn_Click(object sender, EventArgs e)
-        {           
+        {
             if (selectedGallery != null && selectedGallery.Current != null)
             {
                 selectedGallery.Next();
@@ -209,15 +173,91 @@ namespace PhotoViewer
         }
 
         private void PrevBtn_Click(object sender, EventArgs e)
-        {                       
+        {
             if (selectedGallery != null && selectedGallery.Current != null)
             {
                 selectedGallery.Previous();
                 loadImage(selectedGallery.Current.Value);
-                
+
                 UpdateDisplayLbl(Path.GetFileName(selectedGallery.Current.Value));
             }
         }
+        private void RemoveBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedGallery != null && selectedGallery.Current != null)
+            {
+                selectedGallery.Remove(selectedGallery.Current.Value);
+                selectedGallery.Current = selectedGallery.Images.First;
+                CleanUpDeletion();
+            }
+        }
+
+        private void SignOutBtn_Click(object sender, EventArgs e)
+        {
+            SignIn signIn = new SignIn();
+            signIn.Show();
+            this.Dispose();
+        }
+
+        // *** Helper methods
+        private Boolean GalleryNameExists(string name)
+        {
+            foreach (Gallery gallery in galleries)
+            {
+                if (gallery.ToString().Equals(name))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void RefreshGalleryList()
+        {
+            GalleryList.DataSource = null;
+            GalleryList.DataSource = galleries;
+        }
+
+        private void processImage(string filePath)
+        {
+            // double selected galleries? used to be a declaration
+            if (GalleryList.SelectedIndex >= 0)
+            {
+                //int index = GalleryList.SelectedIndex;
+                //selectedGallery = galleries.ElementAt(index);
+                selectedGallery.Add(filePath);
+
+                loadImage(filePath);
+            }            
+        }
+
+        private void loadImage(string filePath)
+        {
+            Image newImage = Image.FromFile(filePath);
+            UpdateDisplayLbl(Path.GetFileName(filePath));
+            PictureBox.Image = newImage;
+        }
+
+        private void GalleryList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (GalleryList.SelectedIndex >= 0)
+            {
+                int targetGallery = GalleryList.SelectedIndex;
+                selectedGallery = galleries.ElementAt(targetGallery);
+                CleanUpDeletion();
+                DisplayGalleryImages();
+            }            
+        }
+
+        private void CleanUpDeletion()
+        {
+            PictureBox.Image = null;
+
+            DisplayGalleryImages();
+            UpdateDisplayLbl("");
+        }
+
 
         private void UpdateDisplayLbl(string name)
         {
@@ -225,17 +265,36 @@ namespace PhotoViewer
             ViewLbl.Text += name;
         }
 
-        private void RemoveBtn_Click(object sender, EventArgs e)
+        private void DisplayGalleryImages()
         {
-            if (selectedGallery != null && selectedGallery.Current != null)
+            Image.GetThumbnailImageAbort Abort = new Image.GetThumbnailImageAbort(ThumbnailCallback);
+
+            ImageGallery.Rows.Clear();
+
+            if (selectedGallery != null)
             {
-                selectedGallery.Remove(selectedGallery.Current.Value);
-                selectedGallery.Current = selectedGallery.Images.First;
-                PictureBox.Image = null;
-                
-                DisplayGalleryImages();                
-                UpdateDisplayLbl("");
+                foreach (string image in selectedGallery.Images)
+                {
+                    Image concreteImage = Image.FromFile(image);
+
+                    ImageGallery.Rows.Add(concreteImage.GetThumbnailImage(50, 50,
+                        new Image.GetThumbnailImageAbort(Abort), IntPtr.Zero));
+                }
             }
+            
         }
+
+        // Works in conjunction with the thumbnail generator
+        public bool ThumbnailCallback()
+        {
+            return false;
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        
     }
 }
