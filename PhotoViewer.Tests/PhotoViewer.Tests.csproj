@@ -62,6 +62,7 @@
     <Compile Include="SecurityTests\PWGenTests.cs" />
     <Compile Include="SecurityTests\SaltGenTests.cs" />
     <Compile Include="SecurityTests\SignInServiceTests.cs" />
+    <Compile Include="SortSearchTests\SearcherTests.cs" />
     <Compile Include="SortSearchTests\SorterTests.cs" />
   </ItemGroup>
   <ItemGroup>

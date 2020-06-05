@@ -8,22 +8,31 @@ namespace PhotoViewer.SortSearch
 {
     public class Searcher
     {
-        public static int Search(List<Gallery> galleries, Gallery target)
+        public static int BSearch(List<User> users, int l, int r, User x)
         {
-            int index = -1;
-
-            for (int i = 0; i < galleries.Count; i++)
+            if (r >= l)
             {
-                if (galleries.ElementAt(i).Equals(target))
+                int mid = l + (r - l) / 2;
+
+                if (users.ElementAt(mid).Username.Equals(x.Username))
                 {
-                    index = i;
+                    return mid;
                 }
+                    
+
+                if (users[mid].Username.CompareTo(x.Username) == 1)
+                {
+                    return BSearch(users, l, mid - 1, x);
+                }                    
+                else
+                {
+                    return BSearch(users, mid + 1, r, x);
+                }
+                
             }
 
-            return index;
+            return -1;
         }
-
-        //public static BSearch()
 
     }
 }
