@@ -43,8 +43,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.SearchGalBtn = new System.Windows.Forms.Button();
+            this.SearchImgBtn = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
@@ -201,23 +201,24 @@
             this.textBox1.Size = new System.Drawing.Size(239, 26);
             this.textBox1.TabIndex = 10;
             // 
-            // button3
+            // SearchGalBtn
             // 
-            this.button3.Location = new System.Drawing.Point(6, 110);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(239, 36);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Search Galleries";
-            this.button3.UseVisualStyleBackColor = true;
+            this.SearchGalBtn.Location = new System.Drawing.Point(6, 110);
+            this.SearchGalBtn.Name = "SearchGalBtn";
+            this.SearchGalBtn.Size = new System.Drawing.Size(239, 36);
+            this.SearchGalBtn.TabIndex = 11;
+            this.SearchGalBtn.Text = "Search Galleries";
+            this.SearchGalBtn.UseVisualStyleBackColor = true;
+            this.SearchGalBtn.Click += new System.EventHandler(this.SearchGalBtn_Click);
             // 
-            // button4
+            // SearchImgBtn
             // 
-            this.button4.Location = new System.Drawing.Point(6, 158);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(239, 37);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Search Images";
-            this.button4.UseVisualStyleBackColor = true;
+            this.SearchImgBtn.Location = new System.Drawing.Point(6, 158);
+            this.SearchImgBtn.Name = "SearchImgBtn";
+            this.SearchImgBtn.Size = new System.Drawing.Size(239, 37);
+            this.SearchImgBtn.TabIndex = 12;
+            this.SearchImgBtn.Text = "Search Images";
+            this.SearchImgBtn.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
@@ -268,8 +269,8 @@
             this.SearchGroup.Controls.Add(this.textBox1);
             this.SearchGroup.Controls.Add(this.button2);
             this.SearchGroup.Controls.Add(this.label3);
-            this.SearchGroup.Controls.Add(this.button3);
-            this.SearchGroup.Controls.Add(this.button4);
+            this.SearchGroup.Controls.Add(this.SearchGalBtn);
+            this.SearchGroup.Controls.Add(this.SearchImgBtn);
             this.SearchGroup.Controls.Add(this.button5);
             this.SearchGroup.Location = new System.Drawing.Point(60, 100);
             this.SearchGroup.Name = "SearchGroup";
@@ -396,8 +397,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button SearchImgBtn;
+        private System.Windows.Forms.Button SearchGalBtn;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Title;

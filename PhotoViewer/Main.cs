@@ -1,13 +1,8 @@
-﻿using LumenWorks.Framework.IO.Csv;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 // ***TODO
@@ -37,19 +32,20 @@ namespace PhotoViewer
             LoadGalleries();
 
             // Only create a default gallery for users with no galleries
-            CreateDefaultGallery();
+            if (galleries.Count == 0)
+            {
+                CreateDefaultGallery();
+            }            
 
             RefreshGalleryList();
         }
 
         private void CreateDefaultGallery()
         {
-            if (galleries.Count == 0)
-            {
-                galleries = new List<Gallery>();
-                defaultGallery = new Gallery("default");
-                galleries.Add(defaultGallery);
-            }
+            galleries = new List<Gallery>();
+            defaultGallery = new Gallery("default");
+            galleries.Add(defaultGallery);
+            
         }
 
         private void LoadGalleries()
@@ -190,6 +186,11 @@ namespace PhotoViewer
                 selectedGallery.Current = selectedGallery.Images.First;
                 CleanUpDeletion();
             }
+        }
+
+        private void SearchGalBtn_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void SignOutBtn_Click(object sender, EventArgs e)

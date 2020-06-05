@@ -24,5 +24,16 @@ namespace PhotoViewer
         public string Salt => salt;
 
         public string Username => username;
+
+        public override bool Equals(object obj)
+        {
+            return obj is User user &&
+                   username == user.username;
+        }
+
+        public override int GetHashCode()
+        {
+            return 799926177 + EqualityComparer<string>.Default.GetHashCode(username);
+        }
     }
 }

@@ -77,6 +77,8 @@
       <DependentUpon>SignIn.cs</DependentUpon>
     </Compile>
     <Compile Include="Security\SignInService.cs" />
+    <Compile Include="SortSearch\Searcher.cs" />
+    <Compile Include="SortSearch\Sorter.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

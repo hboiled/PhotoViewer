@@ -69,5 +69,16 @@ namespace PhotoViewer
         {
             return name;
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Gallery gallery &&
+                   name == gallery.name;
+        }
+
+        public override int GetHashCode()
+        {
+            return 363513814 + EqualityComparer<string>.Default.GetHashCode(name);
+        }
     }
 }
