@@ -1,4 +1,5 @@
 ﻿using LumenWorks.Framework.IO.Csv;
+using PhotoViewer.SortSearch;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -105,19 +106,12 @@ namespace PhotoViewer.Security
             return false;
         }
 
+        // make testable
         private User GetUser(string username)
         {
-            User targetUser = null;
-
-            foreach (User user in users)
-            {
-                if (user.Username.Equals(username))
-                {
-                    return user;
-                }
-            }
-
-            return targetUser;
+            Sorter.MergeSort(users);
+            int index = Searcher.BSearch(users, 0, users.Count, new User(username, "na", "na"));
+            return users.ElementAt(index);
         }
 
         private void SaveUsers()

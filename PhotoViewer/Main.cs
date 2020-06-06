@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotoViewer.SortSearch;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -190,9 +191,37 @@ namespace PhotoViewer
 
         private void SearchGalBtn_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(SearchTB.Text))
+            {
+                int target = Searcher.GallerySearch(SearchTB.Text, galleries);
 
+                if (target >= 0)
+                {
+                    GalleryList.SelectedItem = galleries.ElementAt(target);
+                }
+                
+            }
+            //show error msg
+            SearchTB.Clear();
         }
 
+        private void SearchImgBtn_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(SearchTB.Text))
+            {
+                int target = Searcher.ImageSearch(SearchTB.Text, selectedGallery.Images);
+
+                if (target >= 0)
+                {
+                    // load img
+                    ImageGallery.ClearSelection();
+                    ImageGallery.CurrentCell = ImageGallery.Rows[target].Cells[0];
+                    //ImageGallery.Rows[target].Selected = true;
+                }
+            }
+
+            SearchTB.Clear();
+        }
         private void SignOutBtn_Click(object sender, EventArgs e)
         {
             SignIn signIn = new SignIn();

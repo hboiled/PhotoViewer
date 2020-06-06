@@ -42,7 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SearchTB = new System.Windows.Forms.TextBox();
             this.SearchGalBtn = new System.Windows.Forms.Button();
             this.SearchImgBtn = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -194,12 +194,12 @@
             this.button2.Text = "Sort Galleries";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // SearchTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(239, 26);
-            this.textBox1.TabIndex = 10;
+            this.SearchTB.Location = new System.Drawing.Point(6, 69);
+            this.SearchTB.Name = "SearchTB";
+            this.SearchTB.Size = new System.Drawing.Size(239, 26);
+            this.SearchTB.TabIndex = 10;
             // 
             // SearchGalBtn
             // 
@@ -219,6 +219,7 @@
             this.SearchImgBtn.TabIndex = 12;
             this.SearchImgBtn.Text = "Search Images";
             this.SearchImgBtn.UseVisualStyleBackColor = true;
+            this.SearchImgBtn.Click += new System.EventHandler(this.SearchImgBtn_Click);
             // 
             // button5
             // 
@@ -266,7 +267,7 @@
             this.SearchGroup.Controls.Add(this.DeleteGalleryBtn);
             this.SearchGroup.Controls.Add(this.CreateGalleryBtn);
             this.SearchGroup.Controls.Add(this.button1);
-            this.SearchGroup.Controls.Add(this.textBox1);
+            this.SearchGroup.Controls.Add(this.SearchTB);
             this.SearchGroup.Controls.Add(this.button2);
             this.SearchGroup.Controls.Add(this.label3);
             this.SearchGroup.Controls.Add(this.SearchGalBtn);
@@ -399,7 +400,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button SearchImgBtn;
         private System.Windows.Forms.Button SearchGalBtn;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox SearchTB;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label Title;
         private System.Windows.Forms.Label ViewLbl;

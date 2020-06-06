@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,37 @@ namespace PhotoViewer.SortSearch
             }
 
             return -1;
+        }
+
+        public static int GallerySearch(string name, List<Gallery> galleries)
+        {
+            int index = -1;
+
+            for (int i = 0; i < galleries.Count; i++)
+            {
+                if (galleries.ElementAt(i).ToString().Equals(name))
+                {
+                    index = i;
+                }
+            }
+
+            return index;
+        }
+
+        public static int ImageSearch(string name, LinkedList<string> gallery)
+        {
+            int index = -1;
+
+            for (int i = 0; i < gallery.Count; i++)
+            {
+                string properName = Path.GetFileNameWithoutExtension(gallery.ElementAt(i));
+                if (properName.Equals(name))
+                {
+                    index = 1;
+                }
+            }
+
+            return index;
         }
 
     }

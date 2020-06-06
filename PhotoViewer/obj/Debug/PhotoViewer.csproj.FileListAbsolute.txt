@@ -35,3 +35,4 @@ C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewer\PhotoViewer\obj\Debug\PhotoV
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewer\PhotoViewer\obj\Debug\PhotoViewer.csproj.CopyComplete
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewer\PhotoViewer\obj\Debug\PhotoViewer.exe
 C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewer\PhotoViewer\obj\Debug\PhotoViewer.pdb
+C:\Users\61406\Documents\TAFE\ProjectP3\PhotoViewer\PhotoViewer\obj\Debug\PhotoViewer.csprojAssemblyReference.cache
