@@ -295,6 +295,17 @@ namespace PhotoViewer
             ViewLbl.Text += name;
         }
 
+        // Loads img when selected cell of image gallery is changed
+        private void ImageGallery_CurrentCellChanged(object sender, EventArgs e)
+        {
+            int selected = ImageGallery.CurrentCell.RowIndex;
+
+            if (selected >= 0)
+            {
+                loadImage(selectedGallery.Images.ElementAt(selected));
+            }
+        }
+
         private void DisplayGalleryImages()
         {
             Image.GetThumbnailImageAbort Abort = new Image.GetThumbnailImageAbort(ThumbnailCallback);

@@ -341,6 +341,7 @@
             this.ImageGallery.RowTemplate.Height = 28;
             this.ImageGallery.Size = new System.Drawing.Size(240, 600);
             this.ImageGallery.TabIndex = 15;
+            this.ImageGallery.CurrentCellChanged += new System.EventHandler(this.ImageGallery_CurrentCellChanged);
             // 
             // ImageCol
             // 
