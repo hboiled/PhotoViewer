@@ -222,6 +222,13 @@ namespace PhotoViewer
 
             SearchTB.Clear();
         }
+
+        private void GallerySortBtn_Click(object sender, EventArgs e)
+        {
+            Sorter.GallerySort(galleries);
+            RefreshGalleryList();
+        }
+
         private void SignOutBtn_Click(object sender, EventArgs e)
         {
             SignIn signIn = new SignIn();
@@ -275,7 +282,7 @@ namespace PhotoViewer
             {
                 int targetGallery = GalleryList.SelectedIndex;
                 selectedGallery = galleries.ElementAt(targetGallery);
-                CleanUpDeletion();
+                CleanUpDeletion(); // duplicate logic, check where this affects
                 DisplayGalleryImages();
             }            
         }
@@ -296,14 +303,19 @@ namespace PhotoViewer
         }
 
         // Loads img when selected cell of image gallery is changed
+        // *DEBUG: NULL REF ERROR
         private void ImageGallery_CurrentCellChanged(object sender, EventArgs e)
         {
-            int selected = ImageGallery.CurrentCell.RowIndex;
-
-            if (selected >= 0)
+            if (ImageGallery.CurrentCell != null)
             {
-                loadImage(selectedGallery.Images.ElementAt(selected));
+                int selected = ImageGallery.CurrentCell.RowIndex;
+
+                if (selected >= 0)
+                {
+                    loadImage(selectedGallery.Images.ElementAt(selected));
+                }
             }
+            
         }
 
         private void DisplayGalleryImages()
@@ -319,8 +331,9 @@ namespace PhotoViewer
                     Image concreteImage = Image.FromFile(image);
 
                     ImageGallery.Rows.Add(concreteImage.GetThumbnailImage(50, 50,
-                        new Image.GetThumbnailImageAbort(Abort), IntPtr.Zero));
-                }
+                        new Image.GetThumbnailImageAbort(Abort), IntPtr.Zero));                   
+                }                
+                
             }
             
         }

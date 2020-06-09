@@ -66,7 +66,28 @@ namespace PhotoViewer.SortSearch
             }
             return result;
         }
+        
+        public static void GallerySort(List<Gallery> galleries)
+        {
+            int n = galleries.Count;
 
+            // One by one move boundary of unsorted subarray 
+            for (int i = 0; i < n - 1; i++)
+            {
+                // Find the minimum element in unsorted array 
+                int minIndex = i;
+                for (int j = i + 1; j < n; j++)
+                    if (galleries.ElementAt(j).ToString().CompareTo(
+                        galleries.ElementAt(minIndex).ToString()) == -1)
+                        minIndex = j;
+
+                // Swap the found minimum element with the first 
+                // element 
+                Gallery temp = galleries.ElementAt(minIndex);
+                galleries[minIndex] = galleries.ElementAt(i);
+                galleries[i] = temp;
+            }
+        }
 
     }
 }

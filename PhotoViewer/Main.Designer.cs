@@ -40,12 +40,12 @@
             this.PictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.ImageSortBtn = new System.Windows.Forms.Button();
+            this.GallerySortBtn = new System.Windows.Forms.Button();
             this.SearchTB = new System.Windows.Forms.TextBox();
             this.SearchGalBtn = new System.Windows.Forms.Button();
             this.SearchImgBtn = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.ShowAllBtn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.Title = new System.Windows.Forms.Label();
             this.ViewLbl = new System.Windows.Forms.Label();
@@ -176,23 +176,24 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Images:";
             // 
-            // button1
+            // ImageSortBtn
             // 
-            this.button1.Location = new System.Drawing.Point(269, 160);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(239, 36);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Sort Images";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ImageSortBtn.Location = new System.Drawing.Point(269, 160);
+            this.ImageSortBtn.Name = "ImageSortBtn";
+            this.ImageSortBtn.Size = new System.Drawing.Size(239, 36);
+            this.ImageSortBtn.TabIndex = 9;
+            this.ImageSortBtn.Text = "Sort Images";
+            this.ImageSortBtn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // GallerySortBtn
             // 
-            this.button2.Location = new System.Drawing.Point(269, 110);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(239, 36);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Sort Galleries";
-            this.button2.UseVisualStyleBackColor = true;
+            this.GallerySortBtn.Location = new System.Drawing.Point(269, 110);
+            this.GallerySortBtn.Name = "GallerySortBtn";
+            this.GallerySortBtn.Size = new System.Drawing.Size(239, 36);
+            this.GallerySortBtn.TabIndex = 8;
+            this.GallerySortBtn.Text = "Sort Galleries";
+            this.GallerySortBtn.UseVisualStyleBackColor = true;
+            this.GallerySortBtn.Click += new System.EventHandler(this.GallerySortBtn_Click);
             // 
             // SearchTB
             // 
@@ -221,14 +222,14 @@
             this.SearchImgBtn.UseVisualStyleBackColor = true;
             this.SearchImgBtn.Click += new System.EventHandler(this.SearchImgBtn_Click);
             // 
-            // button5
+            // ShowAllBtn
             // 
-            this.button5.Location = new System.Drawing.Point(269, 65);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(239, 34);
-            this.button5.TabIndex = 13;
-            this.button5.Text = "Show All";
-            this.button5.UseVisualStyleBackColor = true;
+            this.ShowAllBtn.Location = new System.Drawing.Point(269, 65);
+            this.ShowAllBtn.Name = "ShowAllBtn";
+            this.ShowAllBtn.Size = new System.Drawing.Size(239, 34);
+            this.ShowAllBtn.TabIndex = 13;
+            this.ShowAllBtn.Text = "Show All";
+            this.ShowAllBtn.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -266,13 +267,13 @@
             this.SearchGroup.Controls.Add(this.GalleryNameTB);
             this.SearchGroup.Controls.Add(this.DeleteGalleryBtn);
             this.SearchGroup.Controls.Add(this.CreateGalleryBtn);
-            this.SearchGroup.Controls.Add(this.button1);
+            this.SearchGroup.Controls.Add(this.ImageSortBtn);
             this.SearchGroup.Controls.Add(this.SearchTB);
-            this.SearchGroup.Controls.Add(this.button2);
+            this.SearchGroup.Controls.Add(this.GallerySortBtn);
             this.SearchGroup.Controls.Add(this.label3);
             this.SearchGroup.Controls.Add(this.SearchGalBtn);
             this.SearchGroup.Controls.Add(this.SearchImgBtn);
-            this.SearchGroup.Controls.Add(this.button5);
+            this.SearchGroup.Controls.Add(this.ShowAllBtn);
             this.SearchGroup.Location = new System.Drawing.Point(60, 100);
             this.SearchGroup.Name = "SearchGroup";
             this.SearchGroup.Size = new System.Drawing.Size(854, 218);
@@ -396,9 +397,9 @@
         private System.Windows.Forms.PictureBox PictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button GallerySortBtn;
+        private System.Windows.Forms.Button ImageSortBtn;
+        private System.Windows.Forms.Button ShowAllBtn;
         private System.Windows.Forms.Button SearchImgBtn;
         private System.Windows.Forms.Button SearchGalBtn;
         private System.Windows.Forms.TextBox SearchTB;

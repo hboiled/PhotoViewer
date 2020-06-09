@@ -10,14 +10,12 @@ namespace PhotoViewer.Tests.SortSearchTests
 {
     public class SorterTests
     {
-        
 
         [Fact]
         public void MergeSort_ShouldWorkOnLists()
         {
             List<User> users = new List<User>();
             FillWithUsers(users);
-            List<User> temp = new List<User>();
 
             List<User> sortedUsers = SortedList();//new List<User>(users);            
 
@@ -25,6 +23,19 @@ namespace PhotoViewer.Tests.SortSearchTests
             List<User> usersTest = Sorter.MergeSort(users);
 
             Assert.Equal(usersTest, sortedUsers);
+        }
+
+        [Fact]
+        public void GallerySort_ShouldWorkOnLists()
+        {
+            List<Gallery> galleries = new List<Gallery>();
+            FillWithGalleries(galleries);
+
+            List<Gallery> sortedGalleries = SortedGalleryList();
+
+            Sorter.GallerySort(galleries);
+
+            Assert.Equal(galleries, sortedGalleries);
         }
 
         private List<User> SortedList()
@@ -48,6 +59,29 @@ namespace PhotoViewer.Tests.SortSearchTests
             users.Add(new User("Yname", "a", "a"));
             users.Add(new User("Qname", "a", "a"));
             users.Add(new User("Dname", "a", "a"));
+        }
+
+        private List<Gallery> SortedGalleryList()
+        {
+            List<Gallery> galleries = new List<Gallery>();
+            galleries.Add(new Gallery("C"));
+            galleries.Add(new Gallery("D"));
+            galleries.Add(new Gallery("L"));
+            galleries.Add(new Gallery("M"));
+            galleries.Add(new Gallery("W"));            
+            galleries.Add(new Gallery("X"));
+
+            return galleries;
+        }
+
+        private void FillWithGalleries(List<Gallery> galleries)
+        {
+            galleries.Add(new Gallery("D"));
+            galleries.Add(new Gallery("W"));
+            galleries.Add(new Gallery("L"));
+            galleries.Add(new Gallery("X"));
+            galleries.Add(new Gallery("M"));
+            galleries.Add(new Gallery("C"));
         }
     }
 }
