@@ -229,6 +229,15 @@ namespace PhotoViewer
             RefreshGalleryList();
         }
 
+        private void ImageSortBtn_Click(object sender, EventArgs e)
+        {
+            if (selectedGallery != null && !selectedGallery.IsEmpty())
+            {
+                Sorter.ImageSort(selectedGallery.Images);
+                DisplayGalleryImages();
+            }
+        }
+
         private void SignOutBtn_Click(object sender, EventArgs e)
         {
             SignIn signIn = new SignIn();
@@ -349,6 +358,6 @@ namespace PhotoViewer
             Application.Exit();
         }
 
-        
+       
     }
 }

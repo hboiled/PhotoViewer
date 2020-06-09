@@ -77,15 +77,43 @@ namespace PhotoViewer.SortSearch
                 // Find the minimum element in unsorted array 
                 int minIndex = i;
                 for (int j = i + 1; j < n; j++)
+                {
                     if (galleries.ElementAt(j).ToString().CompareTo(
                         galleries.ElementAt(minIndex).ToString()) == -1)
+                    {
                         minIndex = j;
-
+                    }
+                        
+                }
+                
                 // Swap the found minimum element with the first 
                 // element 
                 Gallery temp = galleries.ElementAt(minIndex);
                 galleries[minIndex] = galleries.ElementAt(i);
                 galleries[i] = temp;
+            }
+        }
+
+        public static void ImageSort(LinkedList<string> images)
+        {
+            int n = images.Count;
+
+            for (int i = 0; i < n; i++)
+            {
+                int minIndex = i;
+
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (images.ElementAt(j).CompareTo(
+                        images.ElementAt(minIndex)) == -1)
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                string temp = images.ElementAt(minIndex);
+                images.Find(images.ElementAt(minIndex)).Value = images.ElementAt(i);
+                images.Find(images.ElementAt(i)).Value = temp;
             }
         }
 

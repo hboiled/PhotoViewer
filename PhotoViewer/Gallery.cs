@@ -60,10 +60,6 @@ namespace PhotoViewer
             return images.Count == 0;
         }
 
-        public void MergeSort()
-        {
-
-        }
 
         public override string ToString()
         {

@@ -59,7 +59,7 @@ namespace PhotoViewer.SortSearch
                 string properName = Path.GetFileNameWithoutExtension(gallery.ElementAt(i));
                 if (properName.Equals(name))
                 {
-                    index = 1;
+                    index = i;
                 }
             }
 

@@ -38,6 +38,20 @@ namespace PhotoViewer.Tests.SortSearchTests
             Assert.Equal(galleries, sortedGalleries);
         }
 
+        [Fact]
+        public void ImageSort_ShouldWorkOnLinkedLists()
+        {
+            LinkedList<string> first = new LinkedList<string>();
+            FillLinkedList(first);
+
+            LinkedList<string> second = new LinkedList<string>();
+            FillSortedLinkedList(second);
+
+            Sorter.ImageSort(first);
+
+            Assert.Equal(first, second);
+        }
+
         private List<User> SortedList()
         {
             List<User> users = new List<User>();
@@ -82,6 +96,26 @@ namespace PhotoViewer.Tests.SortSearchTests
             galleries.Add(new Gallery("X"));
             galleries.Add(new Gallery("M"));
             galleries.Add(new Gallery("C"));
+        }
+
+        private void FillLinkedList(LinkedList<string> list)
+        {
+            list.AddLast("L");
+            list.AddLast("P");
+            list.AddLast("V");
+            list.AddLast("A");
+            list.AddLast("Z");
+            list.AddLast("R");
+        }
+        private void FillSortedLinkedList(LinkedList<string> list)
+        {
+            list.AddLast("A");
+            list.AddLast("L");
+            list.AddLast("P");
+            list.AddLast("R");
+            list.AddLast("V");            
+            list.AddLast("Z");
+            
         }
     }
 }
