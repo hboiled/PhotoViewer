@@ -12,9 +12,10 @@ namespace PhotoViewer
         {
             InitializeComponent();
             signInService = new SignInService();
+            signInService.InsertUsersFromCSV();
         }
 
-        
+        // sign in btn functionality
         private void SignInBtn_Click(object sender, EventArgs e)
         {
             if (FieldsNotEmpty())
@@ -31,6 +32,7 @@ namespace PhotoViewer
             ClearFields();
         }
 
+        // register btn functionality        
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             if (FieldsNotEmpty())
@@ -47,6 +49,7 @@ namespace PhotoViewer
             ClearFields();
         }       
 
+        // utility method to check for whitespace in textboxes
         private Boolean FieldsNotEmpty()
         {
             if (string.IsNullOrWhiteSpace(UsernameTB.Text) || 
@@ -59,20 +62,20 @@ namespace PhotoViewer
              
         }
 
+        // utility method to clear fields
         private void ClearFields()
         {
             UsernameTB.Clear();
             PasswordTB.Clear();
         }
 
+        // checks for an existing user before processing sign in
         private void AttemptSignIn(string username, string password)
         {
             if (signInService.UsernameExists(username))
             {
                 if (signInService.ProcessSignIn(username, password))
-                {
-                    // sign in                
-                    // OutcomeMsg.Text = "    " + username+ " has logged in successfully";
+                {                    
                     Main main = new Main(username);
                     main.Show();
                     this.Dispose();
@@ -90,6 +93,7 @@ namespace PhotoViewer
             
         }
 
+        // calls SIS process register and displays the outcome
         private void AttemptRegister(string username, string password)
         {
             if (signInService.ProcessRegister(username, password))

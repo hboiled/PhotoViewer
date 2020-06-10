@@ -6,15 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-// ***TODO
-// ** ON INIT
-// set displayname to logged in user upon init
-// load galleries into gallery list box
-// if user has no galleries, create a default gallery
-
-// sign out btn closes and disposes this form and returns clean sign in form
-//
-
 namespace PhotoViewer
 {
     public partial class Main : Form
@@ -24,6 +15,7 @@ namespace PhotoViewer
         private Gallery defaultGallery;
         private Gallery selectedGallery;
 
+        // constructor takes the signed in username to configure options
         public Main(string username)
         {
             InitializeComponent();
@@ -49,9 +41,9 @@ namespace PhotoViewer
             
         }
 
+        // gallery fetcher does the work
         private void LoadGalleries()
-        {            
-            //string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);
+        {                        
             galleries = GalleryFetcher.FindGalleries(userSignedIn);
         }
 
@@ -68,11 +60,15 @@ namespace PhotoViewer
                     galleries.Add(newGallery);
                     RefreshGalleryList();
                 }
-                // display error msg
+                else
+                {
+                    MessageBox.Show("A gallery by that name already exists");
+                }
                 
             }            
         }
 
+        // deleting a gallery will delete its location on disk too
         private void DeleteGalleryBtn_Click(object sender, EventArgs e)
         {            
             DeleteLocalFile();
@@ -80,6 +76,7 @@ namespace PhotoViewer
             CleanUpDeletion();
         }
 
+        // checks if the file exists before attempting to delete local file
         private void DeleteLocalFile()
         {
             string userPath = string.Format("..\\..\\Data\\Users\\{0}", userSignedIn);            
@@ -103,6 +100,7 @@ namespace PhotoViewer
             
         }
 
+        // removes the list whether saved or unsaved
         private void RemoveFromList()
         {
             if (selectedGallery != null)
@@ -113,6 +111,7 @@ namespace PhotoViewer
             }
         }
 
+        // saves all galleries
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             // create dir if does not exist
@@ -121,6 +120,7 @@ namespace PhotoViewer
             foreach (Gallery gallery in galleries)
             {
                 string name = gallery.ToString();
+                // uses signed in user to name the dir
                 string path = string.Format("..\\..\\Data\\Users\\{0}\\{1}.csv", 
                     userSignedIn, name);
 
@@ -135,7 +135,7 @@ namespace PhotoViewer
             }
         }
 
-
+        // loads a file into selected gallery then displays the image
         private void AddBtn_Click(object sender, EventArgs e)
         {
             string filePath = string.Empty;
@@ -159,6 +159,8 @@ namespace PhotoViewer
                 }
             }
         }
+
+        // iterates to the next image in the gallery
         private void NextBtn_Click(object sender, EventArgs e)
         {
             if (selectedGallery != null && selectedGallery.Current != null)
@@ -169,6 +171,7 @@ namespace PhotoViewer
             }
         }
 
+        // iterates to the previous image in the gallery
         private void PrevBtn_Click(object sender, EventArgs e)
         {
             if (selectedGallery != null && selectedGallery.Current != null)
@@ -179,6 +182,8 @@ namespace PhotoViewer
                 UpdateDisplayLbl(Path.GetFileName(selectedGallery.Current.Value));
             }
         }
+
+        // removes image from gallery, must save to enforce change
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
             if (selectedGallery != null && selectedGallery.Current != null)
@@ -189,6 +194,7 @@ namespace PhotoViewer
             }
         }
 
+        // searches for the specified gallery and sets it to selected if exists
         private void SearchGalBtn_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(SearchTB.Text))
@@ -201,10 +207,11 @@ namespace PhotoViewer
                 }
                 
             }
-            //show error msg
+            
             SearchTB.Clear();
         }
 
+        // searches for the specified image and sets it to selected if exists
         private void SearchImgBtn_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(SearchTB.Text))
@@ -223,12 +230,14 @@ namespace PhotoViewer
             SearchTB.Clear();
         }
 
+        // gallery sorter
         private void GallerySortBtn_Click(object sender, EventArgs e)
         {
             Sorter.GallerySort(galleries);
             RefreshGalleryList();
         }
 
+        // image sorter
         private void ImageSortBtn_Click(object sender, EventArgs e)
         {
             if (selectedGallery != null && !selectedGallery.IsEmpty())
@@ -238,6 +247,7 @@ namespace PhotoViewer
             }
         }
 
+        // signs out for another user to sign in
         private void SignOutBtn_Click(object sender, EventArgs e)
         {
             SignIn signIn = new SignIn();

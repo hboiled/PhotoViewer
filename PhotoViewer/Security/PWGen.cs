@@ -23,6 +23,7 @@ namespace PhotoViewer.Security
             return saltGen.GetSaltString();
         }
 
+        // hashes salted password
         public string GenerateSecurePassword(string plainTextPassword, string salt)
         {            
             string finalString = plainTextPassword + salt;
@@ -30,6 +31,7 @@ namespace PhotoViewer.Security
             return hashGen.HashSaltPassword(finalString);
         }
 
+        // takes attributes of user and generates a hashed pw, compares it with internal hashed pw
         public bool IsPasswordMatch(string password, string salt, string hash)
         {
             string finalString = password + salt;

@@ -20,11 +20,11 @@ namespace PhotoViewer.Security
         public SignInService()
         {
             PWG = new PWGen(new SaltGen(), new HashGen());            
-            users = new List<User>();
-            InsertUsersFromCSV();            
+            users = new List<User>();         
         }
 
-        private void InsertUsersFromCSV()
+        // Loads users from csv file
+        public void InsertUsersFromCSV()
         {
             string filePath = "..\\..\\Data\\users.csv";
 
@@ -44,6 +44,7 @@ namespace PhotoViewer.Security
             }
         }
 
+        // method for signing in using hash functions
         public Boolean ProcessSignIn(string username, string password)
         {
             if (UsernameExists(username))
@@ -54,20 +55,19 @@ namespace PhotoViewer.Security
                 string salt = user.Salt;
                 // gen secure pw 
                 string userPW = user.SecuredPassword;
-                // check for match between secure pw generated and the one stored
-                //MessageBox.Show(securedPW + "\n" + user.SecuredPassword);
+                // check for match between secure pw generated and the one stored                
 
                 if (PWG.IsPasswordMatch(password, salt, userPW))
                 {
-                    // start main window
+                    // start main window, handled in SignIn class
                     return true;
                 }                                
             }
 
-
             return false;
         }
 
+        // registers users and directs to saving to csv file
         public Boolean ProcessRegister(string username, string password)
         {
             if (UsernameExists(username))
@@ -84,6 +84,7 @@ namespace PhotoViewer.Security
             
         }
 
+        // use PWGen to create user and hash password
         public User CreateUser(string username, string password)
         {
             string newSalt = PWG.GetSalt();
@@ -92,7 +93,7 @@ namespace PhotoViewer.Security
             return new User(username, newSalt, securedPW);
         }
 
-        // replace with getuser and calling method checks for null instead?
+        // check for existing users to be used in conjunction with sign in and register
         public Boolean UsernameExists(string username)
         {
             foreach (User user in users)
@@ -106,7 +107,7 @@ namespace PhotoViewer.Security
             return false;
         }
 
-        // make testable
+        // Merge sort then binary search of users list
         private User GetUser(string username)
         {
             Sorter.MergeSort(users);
@@ -114,6 +115,7 @@ namespace PhotoViewer.Security
             return users.ElementAt(index);
         }
 
+        // saves user list to csv, each entry contains name, salt and hashed password
         private void SaveUsers()
         {
             // PATHING BASED ON DEBUG/BIN DIR
@@ -133,6 +135,12 @@ namespace PhotoViewer.Security
                     w.Flush();
                 }
             }
+        }
+
+        // manually adding users to list
+        public void AddUser(User user)
+        {
+            users.Add(user);
         }
     }
 }

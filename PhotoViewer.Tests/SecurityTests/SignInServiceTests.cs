@@ -6,14 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
+
 namespace PhotoViewer.Tests.SecurityTests
 {
     public class SignInServiceTests
     {
-        // ***CHANGE SIGNINSERVICE CTOR TO RESOLVE CONFLICT
+        PWGen PWG;
+        SignInService signInService;
 
-        private PWGen PWG = new PWGen(new SaltGen(), new HashGen());
-        //private SignInService signInService = new SignInService();
+
+        public SignInServiceTests()
+        {
+            PWG = new PWGen(new SaltGen(), new HashGen());
+            signInService = new SignInService();
+        }
+
 
         [Fact]
         public void CreateUser_UsersShoulsHaveUniqueSalt()
@@ -26,11 +33,25 @@ namespace PhotoViewer.Tests.SecurityTests
             string username2 = "test2";
             string password2 = "password2";
 
-            //User testUser1 = SignInService.CreateUser(username, password);
-            //User testUser2 = SignInService.CreateUser(username2, password2);
+            User testUser1 = signInService.CreateUser(username, password);
+            User testUser2 = signInService.CreateUser(username2, password2);
 
-            //Boolean saltsEqual = testUser1.Salt.Equals(testUser2.Salt);
-            //Assert.False(saltsEqual);
-        } 
+            bool saltsEqual = testUser1.Salt.Equals(testUser2.Salt);
+            Assert.False(saltsEqual);
+        }
+
+        [Fact]
+        public void ProcessSignIn_ShouldSignInValidUser()
+        {
+            // Test user
+            string username = "Test";
+            string password = "abc";
+
+            signInService.AddUser(signInService.CreateUser(username, password));
+
+            bool outcome = signInService.ProcessSignIn(username, password);
+
+            Assert.True(outcome);
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace PhotoViewer.SortSearch
 {
     public class Searcher
     {
+        // binary search on list of users
         public static int BSearch(List<User> users, int l, int r, User x)
         {
             if (r >= l)
@@ -35,6 +36,7 @@ namespace PhotoViewer.SortSearch
             return -1;
         }
 
+        // gallery linear search
         public static int GallerySearch(string name, List<Gallery> galleries)
         {
             int index = -1;
@@ -50,6 +52,7 @@ namespace PhotoViewer.SortSearch
             return index;
         }
 
+        // custom search which searches the filename without extension
         public static int ImageSearch(string name, LinkedList<string> gallery)
         {
             int index = -1;

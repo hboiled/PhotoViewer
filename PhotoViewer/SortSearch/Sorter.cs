@@ -33,6 +33,7 @@ namespace PhotoViewer.SortSearch
             return Merge(left, right);
         }
 
+        // merge method which is called recursively
         private static List<User> Merge(List<User> left, List<User> right)
         {
             List<User> result = new List<User>();
@@ -66,7 +67,8 @@ namespace PhotoViewer.SortSearch
             }
             return result;
         }
-        
+
+        // adapted from https://www.geeksforgeeks.org/selection-sort/
         public static void GallerySort(List<Gallery> galleries)
         {
             int n = galleries.Count;
@@ -94,6 +96,7 @@ namespace PhotoViewer.SortSearch
             }
         }
 
+        // selection sort on linked list of image locations
         public static void ImageSort(LinkedList<string> images)
         {
             int n = images.Count;

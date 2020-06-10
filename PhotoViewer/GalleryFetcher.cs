@@ -14,9 +14,11 @@ namespace PhotoViewer
         {
             List<Gallery> galleries = new List<Gallery>();
 
+            // construct path to user, create if does not exist
             string userPath = string.Format("..\\..\\Data\\Users\\{0}", username);
             Directory.CreateDirectory(userPath);
 
+            // get info on what files are stored within the dir, then filter out non csv files
             DirectoryInfo userInfo = new DirectoryInfo(userPath);
             FileInfo[] galleryFiles = userInfo.GetFiles("*.csv");
 
@@ -24,10 +26,13 @@ namespace PhotoViewer
             {
                 foreach (FileInfo file in galleryFiles)
                 {
+                    // create new gallery based on csv file
                     Gallery gallery = new Gallery(Path.GetFileNameWithoutExtension(file.FullName));
                     using (CsvReader csv = new CsvReader(
                                     new StreamReader(file.FullName), false))
                     {
+                        // read all entries (which should be the location of img)
+                        // insert into fresh gallery
                         while (csv.ReadNextRecord())
                         {
                             string location = csv[0];

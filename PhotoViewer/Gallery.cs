@@ -9,7 +9,9 @@ namespace PhotoViewer
 {
     public class Gallery
     {
+        // image gallery
         private LinkedList<string> images;
+        // keep track of current image
         private LinkedListNode<string> current;
         private readonly string name;
 
@@ -24,6 +26,7 @@ namespace PhotoViewer
             Current = null;
         }
 
+        // calls next after checking current and the potential next for null
         public void Next()
         {
             if (Current != null && Current.Next != null)
@@ -32,6 +35,7 @@ namespace PhotoViewer
             }
         }
 
+        // calls previous after checking current and the potential previous for null
         public void Previous()
         {
             if (Current != null && Current.Previous != null)
@@ -66,6 +70,7 @@ namespace PhotoViewer
             return name;
         }
 
+        // override equals and hashcode for equality checks
         public override bool Equals(object obj)
         {
             return obj is Gallery gallery &&
