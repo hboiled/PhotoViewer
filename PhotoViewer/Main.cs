@@ -166,7 +166,11 @@ namespace PhotoViewer
             if (selectedGallery != null && selectedGallery.Current != null)
             {
                 selectedGallery.Next();
-                loadImage(selectedGallery.Current.Value);
+                int currentIndex = ImageGallery.CurrentCell.RowIndex + 1;
+                if (currentIndex < selectedGallery.Images.Count)
+                {
+                    ImageGallery.CurrentCell = ImageGallery.Rows[currentIndex].Cells[0];
+                }                 
                 UpdateDisplayLbl(Path.GetFileName(selectedGallery.Current.Value));
             }
         }
@@ -176,9 +180,12 @@ namespace PhotoViewer
         {
             if (selectedGallery != null && selectedGallery.Current != null)
             {
-                selectedGallery.Previous();
-                loadImage(selectedGallery.Current.Value);
-
+                selectedGallery.Previous();                
+                int currentIndex = ImageGallery.CurrentCell.RowIndex - 1;
+                if (currentIndex >= 0)
+                {
+                    ImageGallery.CurrentCell = ImageGallery.Rows[currentIndex].Cells[0];
+                }                
                 UpdateDisplayLbl(Path.GetFileName(selectedGallery.Current.Value));
             }
         }
@@ -187,7 +194,7 @@ namespace PhotoViewer
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
             if (selectedGallery != null && selectedGallery.Current != null)
-            {
+            {                
                 selectedGallery.Remove(selectedGallery.Current.Value);
                 selectedGallery.Current = selectedGallery.Images.First;
                 CleanUpDeletion();
@@ -269,25 +276,25 @@ namespace PhotoViewer
             return false;
         }
 
+        // manipulates datasource to detect a change in state
         private void RefreshGalleryList()
         {
             GalleryList.DataSource = null;
             GalleryList.DataSource = galleries;
         }
 
+        // adds image to gallery and makes a call to load it
         private void processImage(string filePath)
-        {
-            // double selected galleries? used to be a declaration
+        {            
             if (GalleryList.SelectedIndex >= 0)
             {
-                //int index = GalleryList.SelectedIndex;
-                //selectedGallery = galleries.ElementAt(index);
                 selectedGallery.Add(filePath);
 
                 loadImage(filePath);
             }            
         }
 
+        // create new image and display it in picture box
         private void loadImage(string filePath)
         {
             Image newImage = Image.FromFile(filePath);
@@ -295,13 +302,14 @@ namespace PhotoViewer
             PictureBox.Image = newImage;
         }
 
+        // change selected gallery display
         private void GalleryList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (GalleryList.SelectedIndex >= 0)
             {
                 int targetGallery = GalleryList.SelectedIndex;
                 selectedGallery = galleries.ElementAt(targetGallery);
-                CleanUpDeletion(); // duplicate logic, check where this affects
+                CleanUpDeletion();
                 DisplayGalleryImages();
             }            
         }
@@ -320,9 +328,8 @@ namespace PhotoViewer
             ViewLbl.Text = "Currently Viewing: ";
             ViewLbl.Text += name;
         }
-
+        
         // Loads img when selected cell of image gallery is changed
-        // *DEBUG: NULL REF ERROR
         private void ImageGallery_CurrentCellChanged(object sender, EventArgs e)
         {
             if (ImageGallery.CurrentCell != null)
@@ -331,12 +338,14 @@ namespace PhotoViewer
 
                 if (selected >= 0)
                 {
+                    selectedGallery.Current = selectedGallery.Images.Find(selectedGallery.Images.ElementAt(selected));
                     loadImage(selectedGallery.Images.ElementAt(selected));
                 }
             }
             
         }
 
+        // creates thumbnails of images which are inserted into data grid view
         private void DisplayGalleryImages()
         {
             Image.GetThumbnailImageAbort Abort = new Image.GetThumbnailImageAbort(ThumbnailCallback);
@@ -363,6 +372,7 @@ namespace PhotoViewer
             return false;
         }
 
+        // set closing the form to exit the application entirely to prevent it existing in memory
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();

@@ -51,6 +51,12 @@ namespace PhotoViewer.Security
             {
                 // get user from list
                 User user = GetUser(username);
+
+                if (user == null)
+                {
+                    return false;
+                }
+
                 // get user salt
                 string salt = user.Salt;
                 // gen secure pw 
@@ -110,9 +116,15 @@ namespace PhotoViewer.Security
         // Merge sort then binary search of users list
         private User GetUser(string username)
         {
+            User user = null;
             Sorter.MergeSort(users);
             int index = Searcher.BSearch(users, 0, users.Count, new User(username, "na", "na"));
-            return users.ElementAt(index);
+            if (index >= 0)
+            {
+                user = users.ElementAt(index);
+            }
+
+            return user;
         }
 
         // saves user list to csv, each entry contains name, salt and hashed password
